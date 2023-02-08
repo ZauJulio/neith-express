@@ -50,12 +50,23 @@ function copyTemplate(src, dest, ignore = []) {
 
 async function main() {
   try {
+    copyFiles();
+    gitInit();
+    installDependencies();
+
+    console.log('  >>> The installation is done, this is ready to use!');
+  } catch (error) {
+    console.log(error);
+  }
+
+  function copyFiles() {
     console.log("[1/3] Let's create your app...");
     console.log('  >>> Copying files...');
     // Fetch the template and copy it to the project folder
     copyTemplate(path.join(__dirname, '../'), projectPath, [
       'node_modules',
       'packages',
+      'bin',
       '.git',
     ]);
 
@@ -68,22 +79,21 @@ async function main() {
 
     console.log('  >>> Creating the project...');
     process.chdir(projectPath);
+  }
 
-    console.log("[2/3] Let's install the dependencies...");
-    console.log('  >>> Installing dependencies...');
-    // Install dependencies and log the output
-    execSync('npm install', { stdio: 'inherit' });
-
-    console.log("[3/3] Let's initialize git...");
+  function gitInit() {
+    console.log("[2/3] Let's initialize git...");
     console.log('  >>> Initializing git...');
     execSync('git init');
+  }
+
+  function installDependencies() {
+    console.log("[3/3] Let's install the dependencies...");
+    console.log('  >>> Installing dependencies...');
+    execSync('npm install', { stdio: 'inherit' });
 
     console.log("  >>> Initializing git's hooks...");
     execSync('npx husky install');
-
-    console.log('  >>> The installation is done, this is ready to use!');
-  } catch (error) {
-    console.log(error);
   }
 }
 

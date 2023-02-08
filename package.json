@@ -1,6 +1,6 @@
 {
   "name": "@neith/express",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Typescript+Express+Jest boilerplate",
   "author": "ZauJulio<zaujulio.dev@gmail.com>",
   "repository": "git@github.com:ZauJulio/neith-express.git",
