@@ -27,7 +27,7 @@ The server uses [Winston](https://github.com/winstonjs/winston) and the native d
 
 The code written in TypeScript is transpilated to JavaScript using [Esbuild](https://esbuild.github.io/). Esbuild is an open source compiler that is faster than Babel. Written in GO, [tsx](https://github.com/esbuild-kit/tsx) was used for project automatic build.In addition, the [tsup](https://tsup.egoist.dev/) for server bundle, which is faster than [tsc](https://www.typescriptlang.org/docs/handbook/compilers-Options.html).
 
-For communication, [Express](https://expressjs.com/en-br/) has been selected for being a lightweight, easy-to-use framework. In addition. With adding a Rate Limit Middleware layer for the routes [Express-rate-limit](https://github.com/express-limit/express-limit) and [Cors](https://github.com/expressjs/cors).
+For communication, [Express](https://expressjs.com/en-br/) has been selected for being a lightweight, easy-to-use framework. In addition. With adding a Rate Limit Middleware layer for the routes [Express-rate-limit](https://github.com/express-limit/express-limit) and [Cors](https://github.com/expressjs/cors). And Helmet for security [Helmet](https://helmetjs.github.io/).
 
 Finally, for unit tests the [Jest](https://jestjs.io/) was the framework responsible for unit tests performed. In addition, the [supertest](https://github.com/ladjs/supertest) was used to test the routes with integration tests.
 
@@ -38,6 +38,7 @@ Finally, for unit tests the [Jest](https://jestjs.io/) was the framework respons
   - Express
   - Express-rate-limit
   - Express-winston
+  - Helmet
 
 - Run, Build and Test:
 
