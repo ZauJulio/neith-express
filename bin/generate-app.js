@@ -15,36 +15,72 @@ if (process.argv.length < 3) {
 const projectName = process.argv[2];
 const currentPath = process.cwd();
 const projectPath = path.join(currentPath, projectName);
-const git_repo = YOUR_GIT_URL;
 
 try {
   fs.mkdirSync(projectPath);
 } catch (err) {
-  if (err.code === 'EEXIST') {
-    console.log(
-      `The file ${projectName} already exist in the current directory, please give it another name.`,
-    );
-  } else {
-    console.log(error);
-  }
+  err.code === 'EEXIST'
+    ? console.log(`The file ${projectName} already exist.`)
+    : console.log(err);
+
   process.exit(1);
+}
+
+function copyTemplate(src, dest, ignore = []) {
+  const exists = fs.existsSync(src);
+  const stats = exists && fs.statSync(src);
+  const isDirectory = exists && stats.isDirectory();
+
+  if (exists && isDirectory) {
+    fs.mkdirSync(dest, { recursive: true });
+
+    fs.readdirSync(src).forEach((childItemName) => {
+      if (!ignore.includes(childItemName)) {
+        copyTemplate(
+          path.join(src, childItemName),
+          path.join(dest, childItemName),
+          ignore,
+        );
+      }
+    });
+  } else if (!isDirectory) {
+    fs.copyFileSync(src, dest);
+  }
 }
 
 async function main() {
   try {
-    console.log('Downloading files...');
-    execSync(`git clone --depth 1 ${git_repo} ${projectPath}`);
+    console.log("[1/3] Let's create your app...");
+    console.log('  >>> Copying files...');
+    copyTemplate(path.join(__dirname, '../'), projectPath, [
+      'node_modules',
+      'bin',
+      '.git',
+    ]);
 
+    // Create .env file based on .env.example
+    const envExamplePath = path.join(projectPath, '.env.example');
+
+    if (fs.existsSync(envExamplePath)) {
+      fs.copyFileSync(envExamplePath, path.join(projectPath, '.env'));
+    }
+
+    console.log('  >>> Creating the project...');
     process.chdir(projectPath);
 
-    console.log('Installing dependencies...');
-    execSync('npm install');
+    console.log("[2/3] Let's install the dependencies...");
+    console.log('  >>> Installing dependencies...');
+    // Install dependencies and log the output
+    execSync('npm install', { stdio: 'inherit' });
 
-    console.log('Removing useless files...');
-    execSync('npx rimraf ./.git');
-    fs.rmdirSync(path.join(projectPath, 'bin'), { recursive: true });
+    console.log("[3/3] Let's initialize git...");
+    console.log('  >>> Initializing git...');
+    execSync('git init');
 
-    console.log('The installation is done, this is ready to use !');
+    console.log("  >>> Initializing git's hooks...");
+    execSync('npx husky install');
+
+    console.log('  >>> The installation is done, this is ready to use!');
   } catch (error) {
     console.log(error);
   }
