@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Typescript+Express+Jest boilerplate",
   "author": "ZauJulio<zaujulio.dev@gmail.com>",
-  "repository": "git@github.com:ZauJulio/-neith-express.git",
+  "repository": "git@github.com:ZauJulio/neith-express.git",
   "main": "src/main.ts",
   "license": "MIT",
   "bin": {
