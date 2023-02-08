@@ -21,6 +21,14 @@
 - [📖 Docs](#-docs)
 - [📝 License](#-license)
 
+## Just run:
+
+```bash
+npx @neith/express hello-world
+# or
+pnpx @neith/express hello-world
+```
+
 ## 📑 About the project
 
 The server uses [Winston](https://github.com/winstonjs/winston) and the native debug for log and debug.Winston is a logger for Node.js based on [log4J](https://logging.apache.org/log4J/2.x/).
