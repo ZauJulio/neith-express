@@ -1,14 +1,11 @@
 {
   "name": "@neith/express",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Typescript+Express+Jest boilerplate",
   "author": "ZauJulio<zaujulio.dev@gmail.com>",
   "repository": "git@github.com:ZauJulio/neith-express.git",
   "main": "src/main.ts",
   "license": "MIT",
-  "bin": {
-    "create-neith-express": "bin/generate-app.js"
-  },
   "scripts": {
     "build": "tsup",
     "start": "node dist/main.js",

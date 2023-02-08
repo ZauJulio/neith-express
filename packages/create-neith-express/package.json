@@ -1,0 +1,24 @@
+{
+  "name": "create-neith-express",
+  "version": "0.1.2",
+  "description": "Create a neith-express project",
+  "repository": "git@github.com:ZauJulio/neith-express.git",
+  "main": "index.js",
+  "bin": {
+    "create-neith-express": "./index.js"
+  },
+  "author": "ZauJulio<zaujulio.dev@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "winston",
+    "esbuild",
+    "typescript",
+    "express",
+    "rate-limit",
+    "cors",
+    "helmet",
+    "jest",
+    "supertest",
+    "swagger"
+  ]
+}

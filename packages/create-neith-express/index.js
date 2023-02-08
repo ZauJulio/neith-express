@@ -52,9 +52,9 @@ async function main() {
   try {
     console.log("[1/3] Let's create your app...");
     console.log('  >>> Copying files...');
-    copyTemplate(path.join(__dirname, '../'), projectPath, [
+    copyTemplate(path.join(__dirname, '../../../'), projectPath, [
       'node_modules',
-      'bin',
+      'packages',
       '.git',
     ]);
 
